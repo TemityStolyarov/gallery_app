@@ -5,12 +5,10 @@ import 'package:gallery_app/ui/global_widgets/snack_message.dart';
 class GalleryAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
-  final String selectedText;
   final Search search;
   final Widget? child;
 
   const GalleryAppBar({
-    required this.selectedText,
     required this.search,
     this.child,
     Key? key,
@@ -19,67 +17,56 @@ class GalleryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  border: Border.all(
-                    color: DEFAULT_SUBTITLE_COLOR,
-                    style: BorderStyle.solid,
-                  )),
-              child: Container(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          focusColor: DEFAULT_ACCENT_COLOR,
-                          hintText: 'Search',
-                        ),
-                        cursorColor: DEFAULT_ACCENT_COLOR,
-                      ),
-                    ),
-                    //const SizedBox(width: 16),
-                    Icon(
-                      Icons.search,
-                      color: DEFAULT_ACCENT_COLOR,
-                    ),
-                  ],
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(90.0),
+      child: AppBar(
+        elevation: 0,
+        backgroundColor: DEFAULT_BACKGROUND_COLOR,
+        title: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  decoration: const InputDecoration(
+                    hintText: 'Search',
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                  ),
+                  onChanged: (_) => {/*TODO*/},
                 ),
               ),
-            ),
-          ],
-        )
-      ],
+              IconButton(
+                icon: const Icon(
+                  Icons.search,
+                  color: DEFAULT_ACCENT_COLOR,
+                ),
+                onPressed: () {
+                  if (!search.isOpen) {
+                    search.open(context);
+                  } else {
+                    search.close(context, '');
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+        centerTitle: true,
+      ),
     );
-    //   centerTitle: true,
-    //   actions: [
-    //     GestureDetector(
-    //       onTap: () {
-    //         if (!search.isOpen) {
-    //           search.open(context);
-    //         } else {
-    //           search.close(context, selectedText);
-    //         }
-    //       },
-    //       child: Padding(
-    //         padding: const EdgeInsets.all(5),
-    //         child: child,
-    //       ),
-    //     )
-    //   ],
-    // );
+  }
+
+  void changeText(String value) {
+    //TODO
   }
 }
 
 class Search {
-  final String selectedText;
+  String selectedText;
   bool isOpen;
 
   Search({

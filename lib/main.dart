@@ -24,7 +24,6 @@ class _MainAppState extends State<MainApp> {
       home: Scaffold(
         appBar: GalleryAppBar(
           search: _search,
-          selectedText: '',
         ),
         body: const Center(
           child: Column(
