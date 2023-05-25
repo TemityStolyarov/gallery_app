@@ -3,16 +3,16 @@ part of 'select_page_bloc.dart';
 @immutable
 abstract class SelectPageState {}
 
-class SelectPageInitial extends SelectPageState {}
+class SelectPageInitialState extends SelectPageState {}
 
-class SelectedPopularPage extends SelectPageState {
-  final bool isPopularPageSelected;
-
-  SelectedPopularPage(this.isPopularPageSelected);
+class SelectedNewPageState extends SelectPageState {
+  SelectedNewPageState();
 }
 
-class SelectedNewPage extends SelectPageState {
-  final bool isNewPageSelected;
+class SelectedPopularPageState extends SelectPageState {
+  SelectedPopularPageState();
+}
 
-  SelectedNewPage(this.isNewPageSelected);
+class LoadingPageState extends SelectPageState {
+  LoadingPageState();
 }
