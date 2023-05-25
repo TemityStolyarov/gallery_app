@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gallery_app/constants.dart';
 import 'package:gallery_app/ui/global_widgets/snack_message.dart';
 

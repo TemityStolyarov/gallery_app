@@ -5,7 +5,7 @@ part 'select_page_event.dart';
 part 'select_page_state.dart';
 
 class SelectPageBloc extends Bloc<SelectPageEvent, SelectPageState> {
-  SelectPageBloc() : super(SelectPageInitial()) {
+  SelectPageBloc() : super(SelectPageInitialState()) {
     on<SelectPopularPageEvent>(_selectPopularPage);
     on<SelectNewPageEvent>(_selectNewPage);
     _initialize();
@@ -14,19 +14,19 @@ class SelectPageBloc extends Bloc<SelectPageEvent, SelectPageState> {
   void _selectPopularPage(
       SelectPopularPageEvent event, Emitter<SelectPageState> emit) {
     emit(
-      SelectedPopularPage(true),
+      SelectedPopularPageState(),
     );
   }
 
   void _selectNewPage(SelectNewPageEvent event, Emitter<SelectPageState> emit) {
     emit(
-      SelectedNewPage(true),
+      SelectedNewPageState(),
     );
   }
 
   void _initialize() {
     emit(
-      SelectedNewPage(true),
+      SelectedNewPageState(),
     );
   }
 }
