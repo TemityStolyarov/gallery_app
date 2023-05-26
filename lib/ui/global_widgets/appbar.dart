@@ -60,9 +60,6 @@ class GAppBar extends StatelessWidget {
       ),
     );
   }
-
-  //@override
-  //Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 void changeText(String value) {
@@ -88,48 +85,3 @@ class Search {
     isOpen = false;
   }
 }
-
-// проблемы с шириной
-// AppBar(
-//       elevation: 0,
-//       toolbarHeight: 500,
-//       leading: Expanded(
-//         child: Container(
-//           padding: const EdgeInsets.all(16.0),
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(10.0),
-//             border: Border.all(color: Colors.grey),
-//           ),
-//           child: Row(
-//             children: [
-//               Expanded(
-//                 child: TextField(
-//                   decoration: const InputDecoration(
-//                     hintText: 'Search',
-//                     border: InputBorder.none,
-//                     contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-//                   ),
-//                   onChanged: (_) => {/*TODO*/},
-//                 ),
-//               ),
-//               IconButton(
-//                 icon: const Icon(
-//                   Icons.search,
-//                   color: DEFAULT_ACCENT_COLOR,
-//                 ),
-//                 onPressed: () {
-//                   if (!search.isOpen) {
-//                     search.open(context);
-//                   } else {
-//                     search.close(context, '');
-//                   }
-//                 },
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//       backgroundColor: Colors.white,
-//       centerTitle: true,
-//       actions: [],
-//     );

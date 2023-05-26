@@ -13,6 +13,6 @@ class SelectedPopularPageState extends SelectPageState {
   SelectedPopularPageState();
 }
 
-class LoadingPageState extends SelectPageState {
-  LoadingPageState();
+class SelectedAddPhotoPageState extends SelectPageState {
+  SelectedAddPhotoPageState();
 }

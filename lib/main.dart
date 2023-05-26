@@ -5,6 +5,7 @@ import 'package:gallery_app/ui/global_widgets/appbar.dart';
 import 'package:gallery_app/ui/pages/bloc/select_page_bloc.dart';
 import 'package:gallery_app/ui/pages/new_page.dart';
 import 'package:gallery_app/ui/pages/popular_page.dart';
+// import 'package:gallery_app/ui/utils/image_picker.dart';
 
 void main() {
   runApp(const MainApp());
@@ -22,6 +23,14 @@ class _MainAppState extends State<MainApp> {
     isOpen: false,
     selectedText: 'Empty',
   );
+
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,7 +44,26 @@ class _MainAppState extends State<MainApp> {
             search: _search,
           ),
         ),
-        body: BlocProvider(
+        body: _selectPage(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: DEFAULT_BACKGROUND_COLOR,
+          //fixedColor: DEFAULT_ACCENT_COLOR,
+          items: _getBottomNavigationBar(),
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          selectedItemColor: DEFAULT_ACCENT_COLOR,
+          unselectedItemColor: DEFAULT_SUBTITLE_COLOR,
+        ),
+      ),
+      debugShowCheckedModeBanner: false,
+      color: DEFAULT_ACCENT_COLOR,
+    );
+  }
+
+  Widget _selectPage(int index) {
+    switch (index) {
+      case 0:
+        return BlocProvider(
           create: (context) => SelectPageBloc(),
           child: BlocBuilder<SelectPageBloc, SelectPageState>(
             builder: (context, state) {
@@ -79,37 +107,55 @@ class _MainAppState extends State<MainApp> {
               );
             },
           ),
+        );
+
+      case 1:
+        return const Text('GAddPhotoSliderPanel()');
+      //GAddPhotoSliderPanel();
+      case 2:
+        return const Text('case2');
+      default:
+        return const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Center(
+                  child: Text(
+                    'An error occured while loading main page with BottomNavigationBar!',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+    }
+  }
+
+  _getBottomNavigationBar() {
+    return const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.home_outlined,
+          // color: DEFAULT_ACCENT_COLOR,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: DEFAULT_BACKGROUND_COLOR,
-          fixedColor: DEFAULT_ACCENT_COLOR,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined,
-                color: DEFAULT_ACCENT_COLOR,
-              ),
-              label: 'Feed',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.camera_alt_outlined,
-                color: DEFAULT_SUBTITLE_COLOR,
-              ),
-              label: 'Add photo',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_outline,
-                color: DEFAULT_SUBTITLE_COLOR,
-              ),
-              label: 'Profile',
-            ),
-          ],
-        ),
+        label: 'Feed',
       ),
-      debugShowCheckedModeBanner: false,
-      color: DEFAULT_ACCENT_COLOR,
-    );
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.camera_alt_outlined,
+          // color: DEFAULT_SUBTITLE_COLOR,
+        ),
+        label: 'Add photo',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.person_outline,
+          //color: DEFAULT_SUBTITLE_COLOR,
+        ),
+        label: 'Profile',
+      ),
+    ];
   }
 }

@@ -54,7 +54,6 @@ class NewPage extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         bloc.add(SelectPopularPageEvent());
-                        print('Popular page selected!');
                       },
                       child: const Text(
                         'Popular',
