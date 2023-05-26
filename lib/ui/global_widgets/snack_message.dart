@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/constants.dart';
 
 void showSnackMessage(
   BuildContext context,
@@ -8,15 +9,18 @@ void showSnackMessage(
   ScaffoldMessenger.of(context).hideCurrentSnackBar();
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
+      backgroundColor: DEFAULT_TITLE_COLOR,
       duration: duration,
       content: Text(text),
       action: SnackBarAction(
         label: "ОК",
+        textColor: GRAY_LIGHT,
         onPressed: () {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("ОК"),
+              backgroundColor: DEFAULT_TITLE_COLOR,
+              content: Text("You have pressed 'ОК' button"),
             ),
           );
         },

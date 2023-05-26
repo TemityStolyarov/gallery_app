@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -8,23 +10,31 @@ class SelectPageBloc extends Bloc<SelectPageEvent, SelectPageState> {
   SelectPageBloc() : super(SelectPageInitialState()) {
     on<SelectPopularPageEvent>(_selectPopularPage);
     on<SelectNewPageEvent>(_selectNewPage);
+    on<SelectAddPhotoPageEvent>(_selectAddPhotoPage);
     _initialize();
   }
 
-  void _selectPopularPage(
+  _selectPopularPage(
       SelectPopularPageEvent event, Emitter<SelectPageState> emit) {
     emit(
       SelectedPopularPageState(),
     );
   }
 
-  void _selectNewPage(SelectNewPageEvent event, Emitter<SelectPageState> emit) {
+  _selectNewPage(SelectNewPageEvent event, Emitter<SelectPageState> emit) {
     emit(
       SelectedNewPageState(),
     );
   }
 
-  void _initialize() {
+  _selectAddPhotoPage(
+      SelectAddPhotoPageEvent event, Emitter<SelectPageState> emit) {
+    emit(
+      SelectedAddPhotoPageState(),
+    );
+  }
+
+  _initialize() {
     emit(
       SelectedNewPageState(),
     );

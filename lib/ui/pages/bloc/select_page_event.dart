@@ -10,3 +10,7 @@ class SelectPopularPageEvent extends SelectPageEvent {
 class SelectNewPageEvent extends SelectPageEvent {
   SelectNewPageEvent();
 }
+
+class SelectAddPhotoPageEvent extends SelectPageEvent {
+  SelectAddPhotoPageEvent();
+}
