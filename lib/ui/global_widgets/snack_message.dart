@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/constants.dart';
+import 'package:gallery_app/core/constants.dart';
 
 void showSnackMessage(
   BuildContext context,

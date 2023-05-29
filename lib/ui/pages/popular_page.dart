@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery_app/constants.dart';
+import 'package:gallery_app/core/constants.dart';
 import 'package:gallery_app/ui/pages/bloc/select_page_bloc.dart';
 // import 'package:gallery_app/ui/global_widgets/snack_message.dart';
 

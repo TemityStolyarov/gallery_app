@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery_app/constants.dart';
+import 'package:gallery_app/core/constants.dart';
+import 'package:gallery_app/routes/app_routes.dart';
 import 'package:gallery_app/ui/global_widgets/appbar.dart';
+import 'package:gallery_app/ui/global_widgets/tabbar.dart';
 import 'package:gallery_app/ui/pages/bloc/select_page_bloc.dart';
 import 'package:gallery_app/ui/pages/new_page.dart';
 import 'package:gallery_app/ui/pages/popular_page.dart';
+import 'package:gallery_app/ui/pages/utils/add_photo_panel.dart';
 // import 'package:gallery_app/ui/utils/image_picker.dart';
 
 void main() {
@@ -25,7 +28,27 @@ class _MainAppState extends State<MainApp> {
   );
 
   int _selectedIndex = 0;
+
   void _onItemTapped(int index) {
+    // if (index == 1) {
+    //   showDialog<String>(
+    //     context: context,
+    //     builder: (BuildContext context) => AlertDialog(
+    //       title: const Text('AlertDialog Title'),
+    //       content: const Text('AlertDialog description'),
+    //       actions: <Widget>[
+    //         TextButton(
+    //           onPressed: () => Navigator.pop(context, 'Cancel'),
+    //           child: const Text('Cancel'),
+    //         ),
+    //         TextButton(
+    //           onPressed: () => Navigator.pop(context, 'OK'),
+    //           child: const Text('OK'),
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // }
     setState(() {
       _selectedIndex = index;
     });
@@ -33,7 +56,9 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
+    final appRouter = AppRouter();
     return MaterialApp(
+      onGenerateRoute: appRouter.onGenerateRoute,
       theme: ThemeData(
         scaffoldBackgroundColor: DEFAULT_BACKGROUND_COLOR,
       ),
@@ -53,6 +78,7 @@ class _MainAppState extends State<MainApp> {
           onTap: _onItemTapped,
           selectedItemColor: DEFAULT_ACCENT_COLOR,
           unselectedItemColor: DEFAULT_SUBTITLE_COLOR,
+          unselectedFontSize: 14,
         ),
       ),
       debugShowCheckedModeBanner: false,
@@ -61,59 +87,41 @@ class _MainAppState extends State<MainApp> {
   }
 
   Widget _selectPage(int index) {
+    final screenSize = MediaQuery.of(context).size.width;
     switch (index) {
       case 0:
-        return BlocProvider(
-          create: (context) => SelectPageBloc(),
-          child: BlocBuilder<SelectPageBloc, SelectPageState>(
-            builder: (context, state) {
-              if (state is SelectedNewPageState) {
-                return BlocBuilder<SelectPageBloc, SelectPageState>(
-                  builder: (context, state) {
-                    return const Column(
-                      children: [
-                        NewPage(),
-                      ],
-                    );
-                  },
-                );
-              }
-
-              if (state is SelectedPopularPageState) {
-                return BlocBuilder<SelectPageBloc, SelectPageState>(
-                  builder: (context, state) {
-                    return const Column(
-                      children: [
-                        PopularPage(),
-                      ],
-                    );
-                  },
-                );
-              }
-              return const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Error #main'),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        );
-
+        return const GTabBar();
       case 1:
-        return const Text('GAddPhotoSliderPanel()');
-      //GAddPhotoSliderPanel();
+        // Navigator.of(context).push(PageRouteBuilder(
+        //     opaque: false,
+        //     pageBuilder: (BuildContext context, _, __) {
+        //       return ModalBottomSheetDemo();
+        //     }));
+        // return Container();
+        // showDialog<String>(
+        //   context: context,
+        //   builder: (BuildContext context) => AlertDialog(
+        //     title: const Text('AlertDialog Title'),
+        //     content: const Text('AlertDialog description'),
+        //     actions: <Widget>[
+        //       TextButton(
+        //         onPressed: () => Navigator.pop(context, 'Cancel'),
+        //         child: const Text('Cancel'),
+        //       ),
+        //       TextButton(
+        //         onPressed: () => Navigator.pop(context, 'OK'),
+        //         child: const Text('OK'),
+        //       ),
+        //     ],
+        //   ),
+        // );
+        // return Container(
+        //   child: Text('Noob'),
+        // );
+
+        return AddPhotoDialogPanel(screenSize: screenSize);
       case 2:
-        return const Text('case2');
+        return const Text('An account page');
       default:
         return const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

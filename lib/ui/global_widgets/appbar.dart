@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/constants.dart';
+import 'package:gallery_app/core/constants.dart';
 import 'package:gallery_app/ui/global_widgets/snack_message.dart';
 
 class GAppBar extends StatelessWidget {

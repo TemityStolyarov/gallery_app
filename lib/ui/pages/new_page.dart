@@ -1,9 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery_app/constants.dart';
+import 'package:gallery_app/core/constants.dart';
 import 'package:gallery_app/ui/pages/bloc/select_page_bloc.dart';
+import 'package:gallery_app/ui/pages/feed_widgets/image_grid.dart';
 // import 'package:gallery_app/ui/global_widgets/snack_message.dart';
+
+final dio = Dio();
 
 class NewPage extends StatelessWidget {
   final Widget? child;
@@ -18,57 +22,116 @@ class NewPage extends StatelessWidget {
     return BlocBuilder<SelectPageBloc, SelectPageState>(
       builder: (context, state) {
         final bloc = BlocProvider.of<SelectPageBloc>(context);
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: DEFAULT_ACCENT_COLOR,
-                        width: 2.5,
-                        style: BorderStyle.solid,
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: DEFAULT_ACCENT_COLOR,
+                            width: 2.5,
+                            style: BorderStyle.solid,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  child: const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'New',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
+                      child: const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'New',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        bloc.add(SelectPopularPageEvent());
-                      },
-                      child: const Text(
-                        'Popular',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: DEFAULT_SUBTITLE_COLOR,
-                          fontWeight: FontWeight.w500,
+                  Expanded(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            bloc.add(SelectPopularPageEvent());
+                          },
+                          child: const Text(
+                            'Popular',
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: DEFAULT_SUBTITLE_COLOR,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: ImageGridScreen(),
+            ),
+            // const Padding(
+            //   padding: EdgeInsets.all(10.0),
+            //   child: Column(
+            //     children: [
+            //       Row(
+            //         children: [
+            //           SizedBox(
+            //             child: Card(
+            //               color: Colors.red,
+            //               shape: RoundedRectangleBorder(
+            //                 borderRadius: BorderRadius.all(Radius.circular(10)),
+            //               ),
+            //               child: Text('1'),
+            //             ),
+            //           ),
+            //           SizedBox(
+            //             child: Card(
+            //               color: Colors.red,
+            //               shape: RoundedRectangleBorder(
+            //                 borderRadius: BorderRadius.all(Radius.circular(10)),
+            //               ),
+            //               child: Text('1'),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //       Row(
+            //         children: [
+            //           SizedBox(
+            //             child: Card(
+            //               color: Colors.red,
+            //               shape: RoundedRectangleBorder(
+            //                 borderRadius: BorderRadius.all(Radius.circular(10)),
+            //               ),
+            //               child: Text('1'),
+            //             ),
+            //           ),
+            //           SizedBox(
+            //             child: Card(
+            //               color: Colors.red,
+            //               shape: RoundedRectangleBorder(
+            //                 borderRadius: BorderRadius.all(Radius.circular(10)),
+            //               ),
+            //               child: Text('1'),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
+          ],
         );
       },
     );
