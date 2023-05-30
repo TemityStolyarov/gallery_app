@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/core/constants.dart';
-import 'package:gallery_app/ui/pages/bloc/select_page_bloc.dart';
+import 'package:gallery_app/ui/pages/bloc/select_tab_bloc.dart';
 import 'package:gallery_app/ui/pages/feed_widgets/image_grid.dart';
 // import 'package:gallery_app/ui/global_widgets/snack_message.dart';
 
 final dio = Dio();
 
-class NewPage extends StatelessWidget {
+class NewTab extends StatelessWidget {
   final Widget? child;
 
-  const NewPage({
+  const NewTab({
     this.child,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SelectPageBloc, SelectPageState>(
+    return BlocBuilder<SelectTabBloc, SelectTabState>(
       builder: (context, state) {
-        final bloc = BlocProvider.of<SelectPageBloc>(context);
+        final bloc = BlocProvider.of<SelectTabBloc>(context);
         return Column(
           children: [
             Padding(
@@ -56,7 +56,7 @@ class NewPage extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        bloc.add(SelectPopularPageEvent());
+                        bloc.add(SelectPopularTabEvent());
                       },
                       child: const Center(
                         child: Padding(
@@ -79,8 +79,8 @@ class NewPage extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
+            const Padding(
+              padding: EdgeInsets.all(10),
               child: ImageGridScreen(),
             ),
             // const Padding(

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/core/constants.dart';
-import 'package:gallery_app/ui/pages/bloc/select_page_bloc.dart';
+import 'package:gallery_app/ui/pages/bloc/select_tab_bloc.dart';
 // import 'package:gallery_app/ui/global_widgets/snack_message.dart';
 
-class PopularPage extends StatelessWidget {
+class PopularTab extends StatelessWidget {
   final Widget? child;
 
-  const PopularPage({
+  const PopularTab({
     this.child,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<SelectPageBloc>(context);
-    return BlocBuilder<SelectPageBloc, SelectPageState>(
+    final bloc = BlocProvider.of<SelectTabBloc>(context);
+    return BlocBuilder<SelectTabBloc, SelectTabState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -25,7 +25,7 @@ class PopularPage extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    bloc.add(SelectNewPageEvent());
+                    bloc.add(SelectNewTabEvent());
                   },
                   child: const Center(
                     child: Padding(

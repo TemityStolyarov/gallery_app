@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/ui/pages/feed_widgets/image_api.dart';
+import 'package:gallery_app/ui/pages/utils/image_api.dart';
 import 'package:gallery_app/ui/pages/feed_widgets/image_model.dart';
 
 class ImageGridScreen extends StatefulWidget {
