@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/routes/name_routes.dart';
-import 'package:gallery_app/ui/pages/utils/add_photo_panel.dart';
-// import 'package:testzone/features/auth/screens/login_screen.dart';
-// import 'package:testzone/features/home/home_page.dart';
+import 'package:gallery_app/ui/pages/feed_page/feed_page.dart';
 
 class AppRouter {
   Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      // case NameRoutes.feed:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const GTabBar(),
-      //   );
-      case NameRoutes.addPhoto:
+      case NameRoutes.feed:
         return MaterialPageRoute(
-          builder: (_) => ModalBottomSheetDemo(),
+          builder: (_) => FeedPage(),
         );
-
-      default:
+      case NameRoutes.profile:
+        return MaterialPageRoute(
+          builder: (_) => const Text('An account page'),
+        );
+      default: //switch to error route in prod
         debugPrint('AppRouter: Page ${routeSettings.name} not found');
         return MaterialPageRoute(
-          builder: (_) => ModalBottomSheetDemo(),
+          builder: (_) => Text('Error'), //const ModalBottomSheetDemo(),
         );
     }
   }

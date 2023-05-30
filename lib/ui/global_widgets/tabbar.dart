@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery_app/ui/pages/bloc/select_page_bloc.dart';
-import 'package:gallery_app/ui/pages/new_page.dart';
-import 'package:gallery_app/ui/pages/popular_page.dart';
+import 'package:gallery_app/ui/pages/bloc/select_tab_bloc.dart';
+import 'package:gallery_app/ui/pages/feed_page/new_tab.dart';
+import 'package:gallery_app/ui/pages/feed_page/popular_tab.dart';
 // import 'package:gallery_app/ui/global_widgets/snack_message.dart';
 
 class GTabBar extends StatelessWidget {
@@ -16,27 +16,27 @@ class GTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SelectPageBloc(),
-      child: BlocBuilder<SelectPageBloc, SelectPageState>(
+      create: (context) => SelectTabBloc(),
+      child: BlocBuilder<SelectTabBloc, SelectTabState>(
         builder: (context, state) {
-          if (state is SelectedNewPageState) {
-            return BlocBuilder<SelectPageBloc, SelectPageState>(
+          if (state is SelectedNewTabState) {
+            return BlocBuilder<SelectTabBloc, SelectTabState>(
               builder: (context, state) {
                 return const Column(
                   children: [
-                    NewPage(),
+                    NewTab(),
                   ],
                 );
               },
             );
           }
 
-          if (state is SelectedPopularPageState) {
-            return BlocBuilder<SelectPageBloc, SelectPageState>(
+          if (state is SelectedPopularTabState) {
+            return BlocBuilder<SelectTabBloc, SelectTabState>(
               builder: (context, state) {
                 return const Column(
                   children: [
-                    PopularPage(),
+                    PopularTab(),
                   ],
                 );
               },

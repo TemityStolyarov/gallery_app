@@ -1,4 +1,4 @@
 class NameRoutes {
-  //static const String feed = '/';
-  static const String addPhoto = '/addPhoto';
+  static const String feed = '/';
+  static const String profile = '/profile';
 }
