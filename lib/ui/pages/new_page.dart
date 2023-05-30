@@ -54,14 +54,14 @@ class NewPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            bloc.add(SelectPopularPageEvent());
-                          },
-                          child: const Padding(
+                    child: GestureDetector(
+                      onTap: () {
+                        bloc.add(SelectPopularPageEvent());
+                      },
+                      child: const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Padding(
                             padding: EdgeInsets.only(bottom: 2),
                             child: Text(
                               'Popular',

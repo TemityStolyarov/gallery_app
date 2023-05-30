@@ -23,14 +23,14 @@ class PopularPage extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        bloc.add(SelectNewPageEvent());
-                      },
-                      child: const Padding(
+                child: GestureDetector(
+                  onTap: () {
+                    bloc.add(SelectNewPageEvent());
+                  },
+                  child: const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Padding(
                         padding: EdgeInsets.only(bottom: 2),
                         child: Text(
                           'New',
