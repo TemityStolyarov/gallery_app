@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/core/constants.dart';
 import 'package:gallery_app/routes/app_routes.dart';
 import 'package:gallery_app/ui/global_widgets/appbar.dart';
 import 'package:gallery_app/ui/global_widgets/tabbar.dart';
-import 'package:gallery_app/ui/pages/bloc/select_page_bloc.dart';
-import 'package:gallery_app/ui/pages/new_page.dart';
-import 'package:gallery_app/ui/pages/popular_page.dart';
 import 'package:gallery_app/ui/pages/utils/add_photo_panel.dart';
 // import 'package:gallery_app/ui/utils/image_picker.dart';
 
@@ -61,6 +57,7 @@ class _MainAppState extends State<MainApp> {
       onGenerateRoute: appRouter.onGenerateRoute,
       theme: ThemeData(
         scaffoldBackgroundColor: DEFAULT_BACKGROUND_COLOR,
+        fontFamily: 'SF Pro Display',
       ),
       home: Scaffold(
         appBar: PreferredSize(
@@ -146,21 +143,18 @@ class _MainAppState extends State<MainApp> {
       BottomNavigationBarItem(
         icon: Icon(
           Icons.home_outlined,
-          // color: DEFAULT_ACCENT_COLOR,
         ),
         label: 'Feed',
       ),
       BottomNavigationBarItem(
         icon: Icon(
           Icons.camera_alt_outlined,
-          // color: DEFAULT_SUBTITLE_COLOR,
         ),
         label: 'Add photo',
       ),
       BottomNavigationBarItem(
         icon: Icon(
           Icons.person_outline,
-          //color: DEFAULT_SUBTITLE_COLOR,
         ),
         label: 'Profile',
       ),

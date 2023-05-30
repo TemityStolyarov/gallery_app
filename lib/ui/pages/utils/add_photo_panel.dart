@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:gallery_app/core/constants.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddPhotoDialogPanel extends StatelessWidget {
   final screenSize;
@@ -38,10 +35,6 @@ class AddPhotoDialogPanel extends StatelessWidget {
                   height: 50,
                   child: const Text(
                     'Выбрать из галереи',
-                    // textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'SF Pro Display',
-                    ),
                   ),
                 ),
                 const Divider(
@@ -54,10 +47,6 @@ class AddPhotoDialogPanel extends StatelessWidget {
                   height: 50,
                   child: const Text(
                     'Сделать фото',
-                    style: TextStyle(
-                      fontFamily: 'SF Pro Display',
-                    ),
-                    // textAlign: TextAlign.center,
                   ),
                 ),
               ],
@@ -82,9 +71,7 @@ class AddPhotoDialogPanel extends StatelessWidget {
                   'Отмена',
                   style: TextStyle(
                     color: DEFAULT_ACCENT_COLOR,
-                    fontFamily: 'SF Pro Display',
                   ),
-                  // textAlign: TextAlign.center,
                 ),
               ),
             ),
@@ -109,7 +96,6 @@ class AddPhotoPanel extends StatelessWidget {
             child: Center(
               child: Text(
                 'Выбрать из галереи',
-                // textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -120,7 +106,6 @@ class AddPhotoPanel extends StatelessWidget {
             child: Center(
               child: Text(
                 'Сделать фото',
-                // textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -141,18 +126,13 @@ class AddPhotoPanel extends StatelessWidget {
 }
 
 class ModalBottomSheetDemo extends StatelessWidget {
+  const ModalBottomSheetDemo({super.key});
+
   void showBottomSheet(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
       builder: (context) {
-        return const SafeArea(
-          left: true,
-          right: true,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: AddPhotoPanel(),
-          ),
-        );
+        return const AddPhotoPanel();
       },
     );
   }

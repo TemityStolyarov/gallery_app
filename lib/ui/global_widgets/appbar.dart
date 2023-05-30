@@ -29,7 +29,10 @@ class GAppBar extends StatelessWidget {
               Expanded(
                 child: TextField(
                   decoration: const InputDecoration(
-                    hintStyle: TextStyle(color: DEFAULT_SUBTITLE_COLOR),
+                    hintStyle: TextStyle(
+                      color: DEFAULT_SUBTITLE_COLOR,
+                      
+                    ),
                     hintText: 'Search',
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(horizontal: 20.0),

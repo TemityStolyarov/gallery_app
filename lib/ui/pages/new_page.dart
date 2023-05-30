@@ -46,7 +46,7 @@ class NewPage extends StatelessWidget {
                             'New',
                             style: TextStyle(
                               fontSize: 22,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -61,12 +61,15 @@ class NewPage extends StatelessWidget {
                           onTap: () {
                             bloc.add(SelectPopularPageEvent());
                           },
-                          child: const Text(
-                            'Popular',
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: DEFAULT_SUBTITLE_COLOR,
-                              fontWeight: FontWeight.w500,
+                          child: const Padding(
+                            padding: EdgeInsets.only(bottom: 2),
+                            child: Text(
+                              'Popular',
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: DEFAULT_SUBTITLE_COLOR,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
