@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/ui/pages/utils/image_api.dart';
-import 'package:gallery_app/ui/pages/feed_widgets/image_model.dart';
+import 'package:gallery_app/api/gallery_api.dart';
+import 'package:gallery_app/api/image_model.dart';
 
 class ImageGridScreen extends StatefulWidget {
   const ImageGridScreen({super.key});
@@ -10,13 +10,13 @@ class ImageGridScreen extends StatefulWidget {
 }
 
 class _ImageGridScreenState extends State<ImageGridScreen> {
-  final ApiService _apiService = ApiService();
+  final GalleryApi _galleryApi = GalleryApi();
   late Future<List<ImageModel>> _imagesFuture;
 
   @override
   void initState() {
     super.initState();
-    _imagesFuture = _apiService.getImages();
+    _imagesFuture = _galleryApi.getImages();
   }
 
   @override
@@ -32,7 +32,7 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
               mainAxisSpacing: 8.0, // Расстояние между рядами
               crossAxisSpacing: 8.0, // Расстояние между элементами в ряду
             ),
-            itemCount: images.length,
+            itemCount: images.isEmpty ? 0 : images.length,
             itemBuilder: (context, index) {
               final ImageModel image = images[index];
               return Image.network(image.image
