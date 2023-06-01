@@ -11,8 +11,8 @@ ImageModel _$ImageModelFromJson(Map<String, dynamic> json) => ImageModel(
       name: json['name'] as String,
       dateCreate: json['dateCreate'] as String,
       description: json['description'] as String,
-      isNew: json['isNew'] as bool,
-      isPopular: json['isPopular'] as bool,
+      isNew: json['new'] as bool,
+      isPopular: json['popular'] as bool,
       image: ImageInfoModel.fromJson(json['image'] as Map<String, dynamic>),
       user: json['user'] as String,
     );
@@ -23,8 +23,8 @@ Map<String, dynamic> _$ImageModelToJson(ImageModel instance) =>
       'name': instance.name,
       'dateCreate': instance.dateCreate,
       'description': instance.description,
-      'isNew': instance.isNew,
-      'isPopular': instance.isPopular,
+      'new': instance.isNew,
+      'popular': instance.isPopular,
       'image': instance.image,
       'user': instance.user,
     };

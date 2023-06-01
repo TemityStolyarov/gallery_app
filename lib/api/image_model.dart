@@ -8,7 +8,9 @@ class ImageModel {
   final String name;
   final String dateCreate;
   final String description;
+  @JsonKey(name: 'new')
   final bool isNew;
+  @JsonKey(name: 'popular')
   final bool isPopular;
   final ImageInfoModel image;
   final String user;

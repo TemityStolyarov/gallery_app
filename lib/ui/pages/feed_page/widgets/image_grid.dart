@@ -26,18 +26,32 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final List<ImageModel> images = snapshot.data!;
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // Два элемента в ряду
-              mainAxisSpacing: 8.0, // Расстояние между рядами
-              crossAxisSpacing: 8.0, // Расстояние между элементами в ряду
+          // final screenHeight = MediaQuery.of(context).size.height - 246;
+          return SizedBox(
+            height: 600,
+            child: SingleChildScrollView(
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 150 / 100,
+                ),
+                itemCount: images.length,
+                clipBehavior: Clip.hardEdge,
+                itemBuilder: (context, index) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(5.0),
+                    child: Image.network(
+                      'https://gallery.prod1.webant.ru/media/${images[index].image.name}',
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                },
+              ),
             ),
-            itemCount: images.isEmpty ? 0 : images.length,
-            itemBuilder: (context, index) {
-              final ImageModel image = images[index];
-              return Image.network(image.image
-                  .name); // Замените на вашу логику отображения изображения
-            },
           );
         } else if (snapshot.hasError) {
           return Center(
