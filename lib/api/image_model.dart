@@ -1,9 +1,16 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'image_model.g.dart';
+
+@JsonSerializable()
 class ImageModel {
   final int id;
   final String name;
   final String dateCreate;
   final String description;
+  @JsonKey(name: 'new')
   final bool isNew;
+  @JsonKey(name: 'popular')
   final bool isPopular;
   final ImageInfoModel image;
   final String user;
@@ -19,20 +26,12 @@ class ImageModel {
     required this.user,
   });
 
-  factory ImageModel.fromJson(Map<String, dynamic> json) {
-    return ImageModel(
-      id: json['id'],
-      name: json['name'],
-      dateCreate: json['dateCreate'],
-      description: json['description'],
-      isNew: json['new'],
-      isPopular: json['popular'],
-      image: ImageInfoModel.fromJson(json['image']),
-      user: json['user'],
-    );
-  }
+  factory ImageModel.fromJson(Map<String, dynamic> json) =>
+      _$ImageModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ImageModelToJson(this);
 }
 
+@JsonSerializable()
 class ImageInfoModel {
   final int id;
   final String name;
@@ -42,10 +41,7 @@ class ImageInfoModel {
     required this.name,
   });
 
-  factory ImageInfoModel.fromJson(Map<String, dynamic> json) {
-    return ImageInfoModel(
-      id: json['id'],
-      name: json['name'],
-    );
-  }
+  factory ImageInfoModel.fromJson(Map<String, dynamic> json) =>
+      _$ImageInfoModelFromJson(json);
+  Map<String, dynamic> toJson() => _$ImageInfoModelToJson(this);
 }

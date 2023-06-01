@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/core/constants.dart';
 import 'package:gallery_app/ui/pages/bloc/select_tab_bloc.dart';
-import 'package:gallery_app/ui/pages/feed_widgets/image_grid.dart';
+import 'package:gallery_app/ui/pages/feed_page/widgets/image_grid.dart';
 // import 'package:gallery_app/ui/global_widgets/snack_message.dart';
 
 final dio = Dio();
@@ -80,60 +80,13 @@ class NewTab extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.all(10),
-              child: ImageGridScreen(),
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  ImageGridScreen(),
+                ],
+              ),
             ),
-            // const Padding(
-            //   padding: EdgeInsets.all(10.0),
-            //   child: Column(
-            //     children: [
-            //       Row(
-            //         children: [
-            //           SizedBox(
-            //             child: Card(
-            //               color: Colors.red,
-            //               shape: RoundedRectangleBorder(
-            //                 borderRadius: BorderRadius.all(Radius.circular(10)),
-            //               ),
-            //               child: Text('1'),
-            //             ),
-            //           ),
-            //           SizedBox(
-            //             child: Card(
-            //               color: Colors.red,
-            //               shape: RoundedRectangleBorder(
-            //                 borderRadius: BorderRadius.all(Radius.circular(10)),
-            //               ),
-            //               child: Text('1'),
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //       Row(
-            //         children: [
-            //           SizedBox(
-            //             child: Card(
-            //               color: Colors.red,
-            //               shape: RoundedRectangleBorder(
-            //                 borderRadius: BorderRadius.all(Radius.circular(10)),
-            //               ),
-            //               child: Text('1'),
-            //             ),
-            //           ),
-            //           SizedBox(
-            //             child: Card(
-            //               color: Colors.red,
-            //               shape: RoundedRectangleBorder(
-            //                 borderRadius: BorderRadius.all(Radius.circular(10)),
-            //               ),
-            //               child: Text('1'),
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         );
       },

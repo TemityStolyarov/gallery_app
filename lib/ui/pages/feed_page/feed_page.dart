@@ -41,7 +41,7 @@ class _FeedPageState extends State<FeedPage> {
           search: _search,
         ),
       ),
-      body: const GTabBar(), //_selectPage(_selectedIndex),
+      body: const GTabBar(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: DEFAULT_BACKGROUND_COLOR,
         items: _getBottomNavigationBar(),
