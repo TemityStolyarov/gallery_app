@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/ui/pages/bloc/select_tab_bloc.dart';
-import 'package:gallery_app/ui/pages/feed_page/widgets/new_tab.dart';
-import 'package:gallery_app/ui/pages/feed_page/widgets/popular_tab.dart';
-// import 'package:gallery_app/ui/global_widgets/snack_message.dart';
+import 'package:gallery_app/ui/pages/feed_page/local_widgets/new_tab.dart';
+import 'package:gallery_app/ui/pages/feed_page/local_widgets/popular_tab.dart';
 
 class GTabBar extends StatelessWidget {
   final Widget? child;
@@ -22,11 +21,7 @@ class GTabBar extends StatelessWidget {
           if (state is SelectedNewTabState) {
             return BlocBuilder<SelectTabBloc, SelectTabState>(
               builder: (context, state) {
-                return const Column(
-                  children: [
-                    NewTab(),
-                  ],
-                );
+                return const NewTab();
               },
             );
           }

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/core/constants.dart';
-import 'package:gallery_app/ui/widgets/gappbar.dart';
-import 'package:gallery_app/ui/widgets/gtabbar.dart';
 import 'package:gallery_app/ui/widgets/add_photo_panel.dart';
+import 'package:gallery_app/ui/widgets/gaccountbar.dart';
 
-class FeedPage extends StatefulWidget {
-  const FeedPage({super.key});
+class AccountPage extends StatefulWidget {
+  const AccountPage({super.key});
 
   @override
-  State<FeedPage> createState() => _FeedPageState();
+  State<AccountPage> createState() => _AccountPageState();
 }
 
-class _FeedPageState extends State<FeedPage> {
-  int _selectedIndex = 0;
+class _AccountPageState extends State<AccountPage> {
+  int _selectedIndex = 2;
 
   void onItemTapped(int index) async {
-    if (index == 2) {
-      Navigator.of(context).pushNamed('/profile');
+    if (index == 0) {
+      Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
     }
     if (index == 1) {
       await showDialog<String>(
@@ -35,10 +34,28 @@ class _FeedPageState extends State<FeedPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(70.0),
-        child: GAppBar(),
+        preferredSize: Size.fromHeight(65.0),
+        child: GAccountBar(),
       ),
-      body: const GTabBar(),
+      body: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'An account page',
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: DEFAULT_BACKGROUND_COLOR,
         items: _getBottomNavigationBar(),

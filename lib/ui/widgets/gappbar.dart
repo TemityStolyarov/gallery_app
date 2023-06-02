@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/core/constants.dart';
-import 'package:gallery_app/ui/global_widgets/snack_message.dart';
+import 'package:gallery_app/ui/widgets/snack_message.dart';
 
 class GAppBar extends StatelessWidget {
-  final Search search;
   final Widget? child;
 
   const GAppBar({
-    required this.search,
     this.child,
     Key? key,
   }) : super(key: key);
@@ -31,14 +29,17 @@ class GAppBar extends StatelessWidget {
                   decoration: const InputDecoration(
                     hintStyle: TextStyle(
                       color: DEFAULT_SUBTITLE_COLOR,
-                      
                     ),
                     hintText: 'Search',
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                   ),
-                  onChanged: (_) => {/*TODO search functions*/},
-                  onTapOutside: (event) {},
+                  onChanged: (text) => {
+                    searchingText = text,
+                  },
+                  onTapOutside: (event) {
+                    //TODO
+                  },
                   cursorColor: DEFAULT_ACCENT_COLOR,
                 ),
               ),
@@ -50,10 +51,10 @@ class GAppBar extends StatelessWidget {
                   color: DEFAULT_ACCENT_COLOR,
                 ),
                 onPressed: () {
-                  if (!search.isOpen) {
-                    search.open(context);
+                  if (searchingText.isEmpty) {
+                    showSnackMessage(context, '\'Search\' is pressed');
                   } else {
-                    search.close(context, '');
+                    showSnackMessage(context, 'Searching $searchingText');
                   }
                 },
               ),
@@ -65,26 +66,4 @@ class GAppBar extends StatelessWidget {
   }
 }
 
-void changeText(String value) {
-  //TODO
-}
-
-class Search {
-  String selectedText;
-  bool isOpen;
-
-  Search({
-    required this.selectedText,
-    required this.isOpen,
-  });
-
-  void open(BuildContext context) {
-    showSnackMessage(context, '\'Search\' is pressed');
-    isOpen = true;
-  }
-
-  void close(BuildContext context, String selectedText) {
-    showSnackMessage(context, 'Searching $selectedText');
-    isOpen = false;
-  }
-}
+String searchingText = '';

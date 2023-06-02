@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/core/constants.dart';
 import 'package:gallery_app/ui/pages/bloc/select_tab_bloc.dart';
-import 'package:gallery_app/ui/pages/feed_page/widgets/image_grid.dart';
-// import 'package:gallery_app/ui/global_widgets/snack_message.dart';
+import 'package:gallery_app/ui/pages/feed_page/local_widgets/new_image_grid.dart';
 
 final dio = Dio();
 
@@ -81,11 +79,7 @@ class NewTab extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  ImageGridScreen(),
-                ],
-              ),
+              child: NewImageGridScreen(),
             ),
           ],
         );

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:gallery_app/api/gallery_api.dart';
 import 'package:gallery_app/api/image_model.dart';
 
-class ImageGridScreen extends StatefulWidget {
-  const ImageGridScreen({super.key});
+class NewImageGridScreen extends StatefulWidget {
+  const NewImageGridScreen({super.key});
 
   @override
   createState() => _ImageGridScreenState();
 }
 
-class _ImageGridScreenState extends State<ImageGridScreen> {
+class _ImageGridScreenState extends State<NewImageGridScreen> {
   final GalleryApi _galleryApi = GalleryApi();
   late Future<List<ImageModel>> _imagesFuture;
 
   @override
   void initState() {
     super.initState();
-    _imagesFuture = _galleryApi.getImages();
+    _imagesFuture = _galleryApi.getNewImages();
   }
 
   @override
@@ -26,10 +26,11 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final List<ImageModel> images = snapshot.data!;
-          // final screenHeight = MediaQuery.of(context).size.height - 246;
+          final screenHeight = MediaQuery.of(context).size.height - 258;
           return SizedBox(
-            height: 600,
+            height: screenHeight,
             child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
