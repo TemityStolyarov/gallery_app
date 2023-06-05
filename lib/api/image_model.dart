@@ -45,3 +45,30 @@ class ImageInfoModel {
       _$ImageInfoModelFromJson(json);
   Map<String, dynamic> toJson() => _$ImageInfoModelToJson(this);
 }
+
+// @JsonSerializable()
+// class UserInfoModel {
+//   final int id;
+//   final String? email;
+//   final bool? enabled;
+//   final String? phone;
+//   final String? fullName;
+//   final String username;
+//   final DateTime? birthday;
+//   final List<String> roles;
+
+//   UserInfoModel(
+//     this.id,
+//     this.email,
+//     this.enabled,
+//     this.phone,
+//     this.fullName,
+//     this.username,
+//     this.birthday,
+//     this.roles,
+//   );
+
+//   factory UserInfoModel.fromJson(Map<String, dynamic> json) =>
+//       _$UserInfoModelFromJson(json);
+//   Map<String, dynamic> toJson() => _$ImageInfoModelToJson(this);
+// }

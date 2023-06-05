@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gallery_app/api/gallery_api.dart';
 import 'package:gallery_app/api/image_model.dart';
+import 'package:gallery_app/ui/pages/feed_page/local_widgets/image_detail_page.dart';
+
+import 'package:http/http.dart' as http;
 
 class NewImageGridScreen extends StatefulWidget {
   const NewImageGridScreen({super.key});
@@ -43,11 +48,29 @@ class _ImageGridScreenState extends State<NewImageGridScreen> {
                 itemCount: images.length,
                 clipBehavior: Clip.hardEdge,
                 itemBuilder: (context, index) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(5.0),
-                    child: Image.network(
-                      'https://gallery.prod1.webant.ru/media/${images[index].image.name}',
-                      fit: BoxFit.cover,
+                  return GestureDetector(
+                    onTap: () async {
+                      final response = await http.get(Uri.parse(
+                          'https://gallery.prod1.webant.ru${images[index].user}'));
+                      final jsonResponse = jsonDecode(response.body);
+                      final username = jsonResponse['username'];
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ImageDetailPage(
+                            images[index],
+                            username: username,
+                          ),
+                        ),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5.0),
+                      child: Image.network(
+                        'https://gallery.prod1.webant.ru/media/${images[index].image.name}',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   );
                 },
