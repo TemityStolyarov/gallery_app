@@ -57,11 +57,17 @@ class _ImageGridScreenState extends State<PopularImageGridScreen> {
 
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => ImageDetailPage(
-                            images[index],
-                            username: username,
-                          ),
+                        PageRouteBuilder(
+                          transitionDuration: Duration
+                              .zero, // Устанавливаем продолжительность анимации на ноль
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) {
+                            // Возвращаем новую страницу, которую нужно открыть
+                            return ImageDetailPage(
+                              images[index],
+                              username: username,
+                            );
+                          },
                         ),
                       );
                     },

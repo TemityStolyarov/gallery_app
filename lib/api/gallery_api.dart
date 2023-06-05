@@ -24,14 +24,14 @@ class GalleryApi {
   Future<List<ImageModel>> filterNewImages(List<ImageModel> images) async {
     final filteredImages = <ImageModel>[];
     for (final image in images) {
-      // http.Response response = await http.get(
-      //   Uri.parse('https://gallery.prod1.webant.ru/media/${image.image.name}'),
-      // );
-      // if (response.statusCode == 200) {
-      if (image.isNew) {
-        filteredImages.add(image);
+      http.Response response = await http.get(
+        Uri.parse('https://gallery.prod1.webant.ru/media/${image.image.name}'),
+      );
+      if (response.statusCode == 200) {
+        if (image.isNew) {
+          filteredImages.add(image);
+        }
       }
-      // }
     }
     return filteredImages;
   }
@@ -54,14 +54,14 @@ class GalleryApi {
   Future<List<ImageModel>> filterPopularImages(List<ImageModel> images) async {
     final filteredImages = <ImageModel>[];
     for (final image in images) {
-      // http.Response response = await http.get(
-      //   Uri.parse('https://gallery.prod1.webant.ru/media/${image.image.name}'),
-      // );
-      // if (response.statusCode == 200) {
-      if (image.isPopular) {
-        filteredImages.add(image);
+      http.Response response = await http.get(
+        Uri.parse('https://gallery.prod1.webant.ru/media/${image.image.name}'),
+      );
+      if (response.statusCode == 200) {
+        if (image.isPopular) {
+          filteredImages.add(image);
+        }
       }
-      // }
     }
     return filteredImages;
   }

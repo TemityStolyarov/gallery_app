@@ -52,9 +52,17 @@ class GAppBar extends StatelessWidget {
                 ),
                 onPressed: () {
                   if (searchingText.isEmpty) {
-                    showSnackMessage(context, '\'Search\' is pressed');
+                    showSnackMessage(
+                      context,
+                      '\'Search\' is pressed',
+                      showActionButton: true,
+                    );
                   } else {
-                    showSnackMessage(context, 'Searching $searchingText');
+                    showSnackMessage(
+                      context,
+                      'Searching $searchingText',
+                      showActionButton: true,
+                    );
                   }
                 },
               ),

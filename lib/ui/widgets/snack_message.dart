@@ -5,6 +5,7 @@ void showSnackMessage(
   BuildContext context,
   String text, {
   Duration duration = const Duration(seconds: 1),
+  required bool showActionButton,
 }) {
   ScaffoldMessenger.of(context).hideCurrentSnackBar();
   ScaffoldMessenger.of(context).showSnackBar(
@@ -12,19 +13,21 @@ void showSnackMessage(
       backgroundColor: DEFAULT_TITLE_COLOR,
       duration: duration,
       content: Text(text),
-      action: SnackBarAction(
-        label: "ОК",
-        textColor: GRAY_LIGHT,
-        onPressed: () {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              backgroundColor: DEFAULT_TITLE_COLOR,
-              content: Text("You have pressed 'ОК' button"),
-            ),
-          );
-        },
-      ),
+      action: showActionButton
+          ? SnackBarAction(
+              label: "ОК",
+              textColor: GRAY_LIGHT,
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: DEFAULT_TITLE_COLOR,
+                    content: Text("You have pressed 'ОК' button"),
+                  ),
+                );
+              },
+            )
+          : null,
     ),
   );
 }
