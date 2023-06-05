@@ -17,4 +17,6 @@ An application that gets access to a library of images and allows you to display
 * 05/31 - 4h
 * 06/01 - X
 * 06/02 - 4h
+* 06/03 - X
+* 06/04 - X
 
