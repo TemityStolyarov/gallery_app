@@ -8,16 +8,16 @@ class AppRouter {
     switch (routeSettings.name) {
       case NameRoutes.feed:
         return MaterialPageRoute(
-          builder: (_) => FeedPage(),
+          builder: (_) => const FeedPage(),
         );
       case NameRoutes.profile:
         return MaterialPageRoute(
-          builder: (_) => AccountPage(),
+          builder: (_) => const AccountPage(),
         );
       default: //switch to error route in prod
         debugPrint('AppRouter: Page ${routeSettings.name} not found');
         return MaterialPageRoute(
-          builder: (_) => Text('Error'), //const ModalBottomSheetDemo(),
+          builder: (_) => const Text('Error'),
         );
     }
   }

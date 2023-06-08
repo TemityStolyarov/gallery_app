@@ -78,18 +78,3 @@ class AddPhotoDialogPanel extends StatelessWidget {
     );
   }
 }
-
-
-// Future<void> uploadPhoto(ImageSource source) async {
-//   final picker = ImagePicker();
-//   final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-
-//   if (pickedImage != null) {
-//     final imageFile = File(pickedImage.path);
-//     // Image picked successfully, do something with the image
-//     // For example, you can upload it to a server or display it in your UI
-//     // using a widget like Image.file or Image.memory.
-//   } else {
-//     // User canceled the image picking
-//   }
-// }

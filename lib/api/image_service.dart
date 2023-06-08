@@ -18,9 +18,6 @@ class ImageService {
       if (images.isEmpty) {
         return [];
       }
-      // if (images.length < 10) {
-      //   return [];
-      // }
       return images;
     } else {
       throw Exception('Error, status code: ${response.statusCode}');
