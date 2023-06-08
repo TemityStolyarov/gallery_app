@@ -9,7 +9,6 @@ import 'package:gallery_app/core/loading_indicator.dart';
 import 'package:gallery_app/ui/pages/image_detail_page/image_detail_page.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class NewImageGridScreen extends StatefulWidget {
   const NewImageGridScreen({super.key});

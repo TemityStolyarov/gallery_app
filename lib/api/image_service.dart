@@ -1,10 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gallery_app/core/image_model.dart';
-
-final imageServiceProvider = Provider<ImageService>((ref) {
-  return ImageService();
-});
 
 class ImageService {
   final Dio _dio = Dio();
