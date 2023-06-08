@@ -29,11 +29,7 @@ class GTabBar extends StatelessWidget {
           if (state is SelectedPopularTabState) {
             return BlocBuilder<SelectTabBloc, SelectTabState>(
               builder: (context, state) {
-                return const Column(
-                  children: [
-                    PopularTab(),
-                  ],
-                );
+                return const PopularTab();
               },
             );
           }

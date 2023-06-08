@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_app/core/constants.dart';
@@ -6,8 +5,6 @@ import 'package:gallery_app/ui/pages/bloc/select_tab_bloc.dart';
 import 'package:gallery_app/ui/pages/connection_error_page/connection_error_page.dart';
 import 'package:gallery_app/ui/pages/feed_page/local_widgets/new_image_grid.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-
-final dio = Dio();
 
 class NewTab extends StatefulWidget {
   final Widget? child;
@@ -109,7 +106,7 @@ class _NewTabState extends State<NewTab> {
                     )
                   : const Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: 120, horizontal: 16),
+                          EdgeInsets.symmetric(vertical: 100, horizontal: 16),
                       child: Center(
                         child: ConnectionErrorPage(),
                       ),

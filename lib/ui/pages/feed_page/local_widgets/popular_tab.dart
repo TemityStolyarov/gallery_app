@@ -37,9 +37,9 @@ class _PopularTabState extends State<PopularTab> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<SelectTabBloc>(context);
     return BlocBuilder<SelectTabBloc, SelectTabState>(
       builder: (context, state) {
+        final bloc = BlocProvider.of<SelectTabBloc>(context);
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -106,7 +106,7 @@ class _PopularTabState extends State<PopularTab> {
                     )
                   : const Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: 120, horizontal: 16),
+                          EdgeInsets.symmetric(vertical: 100, horizontal: 16),
                       child: Center(
                         child: ConnectionErrorPage(),
                       ),
