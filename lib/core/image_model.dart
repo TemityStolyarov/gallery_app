@@ -4,7 +4,7 @@ part 'image_model.g.dart';
 
 @JsonSerializable()
 class ImageModel {
-  final int id;
+  final int? id;
   final String name;
   final String dateCreate;
   final String description;
@@ -13,7 +13,7 @@ class ImageModel {
   @JsonKey(name: 'popular')
   final bool isPopular;
   final ImageInfoModel image;
-  final String user;
+  final String? user;
 
   ImageModel({
     required this.id,
@@ -33,7 +33,7 @@ class ImageModel {
 
 @JsonSerializable()
 class ImageInfoModel {
-  final int id;
+  final int? id;
   final String name;
 
   ImageInfoModel({

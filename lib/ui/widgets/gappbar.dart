@@ -16,11 +16,11 @@ class GAppBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
       child: AppBar(
         elevation: 0,
-        backgroundColor: DEFAULT_BACKGROUND_COLOR,
+        backgroundColor: defaultBackgroundColor,
         title: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            border: Border.all(color: GRAY_LIGHT),
+            border: Border.all(color: grayLight),
           ),
           child: Row(
             children: [
@@ -28,7 +28,7 @@ class GAppBar extends StatelessWidget {
                 child: TextField(
                   decoration: const InputDecoration(
                     hintStyle: TextStyle(
-                      color: DEFAULT_SUBTITLE_COLOR,
+                      color: defaultSubtitleColor,
                     ),
                     hintText: 'Search',
                     border: InputBorder.none,
@@ -37,18 +37,15 @@ class GAppBar extends StatelessWidget {
                   onChanged: (text) => {
                     searchingText = text,
                   },
-                  onTapOutside: (event) {
-                    //TODO
-                  },
-                  cursorColor: DEFAULT_ACCENT_COLOR,
+                  cursorColor: defaultAccentColor,
                 ),
               ),
               IconButton(
-                splashColor: INVISIBLE,
-                highlightColor: INVISIBLE,
+                splashColor: invisible,
+                highlightColor: invisible,
                 icon: const Icon(
                   Icons.search_sharp,
-                  color: DEFAULT_ACCENT_COLOR,
+                  color: defaultAccentColor,
                 ),
                 onPressed: () {
                   if (searchingText.isEmpty) {

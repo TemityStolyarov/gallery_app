@@ -1,6 +1,7 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_app/api/image_model.dart';
 import 'package:gallery_app/core/constants.dart';
+import 'package:gallery_app/core/image_model.dart';
 import 'package:gallery_app/ui/widgets/add_photo_panel.dart';
 import 'package:intl/intl.dart';
 
@@ -48,9 +49,9 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         toolbarHeight: 60,
         elevation: 0,
         title: const Text(''),
-        backgroundColor: DEFAULT_BACKGROUND_COLOR,
+        backgroundColor: defaultBackgroundColor,
         iconTheme: const IconThemeData(
-          color: DEFAULT_TITLE_COLOR,
+          color: defaultTitleColor,
         ),
       ),
       body: SingleChildScrollView(
@@ -60,6 +61,21 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
             Image.network(
               'https://gallery.prod1.webant.ru/media/${widget.image.image.name}',
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return DottedBorder(
+                  borderPadding: const EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(60),
+                  strokeCap: StrokeCap.round,
+                  dashPattern: const [7, 10],
+                  color: defaultAccentColor,
+                  strokeWidth: 2,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/on_error.png',
+                    ),
+                  ),
+                );
+              },
             ),
             Container(
               padding: const EdgeInsets.all(16),
@@ -75,7 +91,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: DEFAULT_TITLE_COLOR,
+                        color: defaultTitleColor,
                       ),
                     ),
                   ),
@@ -85,7 +101,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
                       widget.username,
                       style: const TextStyle(
                         fontSize: 15,
-                        color: DEFAULT_ACCENT_COLOR,
+                        color: defaultAccentColor,
                       ),
                     ),
                   ),
@@ -94,56 +110,53 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
                         ? widget.image.description
                         : 'No description',
                   ),
-                  // Tags
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15.0),
                     child: Row(
                       children: [
-                        widget.image.isNew
-                            ? Container(
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(16.0),
-                                  ),
-                                  color: DEFAULT_ACCENT_COLOR,
+                        if (widget.image.isNew)
+                          Container(
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16.0),
+                              ),
+                              color: defaultAccentColor,
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'New',
+                                style: TextStyle(
+                                  color: defaultBackgroundColor,
                                 ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text(
-                                    'New',
-                                    style: TextStyle(
-                                      color: DEFAULT_BACKGROUND_COLOR,
-                                    ),
-                                  ),
+                              ),
+                            ),
+                          ),
+                        if (widget.image.isPopular)
+                          Container(
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16.0),
+                              ),
+                              color: defaultAccentColor,
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'Popular',
+                                style: TextStyle(
+                                  color: defaultBackgroundColor,
                                 ),
-                              )
-                            : const Text(''),
-                        widget.image.isPopular
-                            ? Container(
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(16.0),
-                                  ),
-                                  color: DEFAULT_ACCENT_COLOR,
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text(
-                                    'Popular',
-                                    style: TextStyle(
-                                      color: DEFAULT_BACKGROUND_COLOR,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : const Text(''),
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),
                   Text(
                     convertedDateTime,
                     style: const TextStyle(
-                      color: DEFAULT_SUBTITLE_COLOR,
+                      color: defaultSubtitleColor,
                     ),
                   ),
                   const Padding(
@@ -157,7 +170,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
                         Text(
                           '999+',
                           style: TextStyle(
-                            color: DEFAULT_SUBTITLE_COLOR,
+                            color: defaultSubtitleColor,
                           ),
                         ),
                       ],
@@ -170,12 +183,12 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: DEFAULT_BACKGROUND_COLOR,
+        backgroundColor: defaultBackgroundColor,
         items: _getBottomNavigationBar(),
         currentIndex: _selectedIndex,
         onTap: onItemTapped,
-        selectedItemColor: DEFAULT_ACCENT_COLOR,
-        unselectedItemColor: DEFAULT_SUBTITLE_COLOR,
+        selectedItemColor: defaultAccentColor,
+        unselectedItemColor: defaultSubtitleColor,
         unselectedFontSize: 14,
       ),
     );

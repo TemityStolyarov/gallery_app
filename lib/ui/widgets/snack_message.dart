@@ -10,18 +10,18 @@ void showSnackMessage(
   ScaffoldMessenger.of(context).hideCurrentSnackBar();
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      backgroundColor: DEFAULT_TITLE_COLOR,
+      backgroundColor: defaultTitleColor,
       duration: duration,
       content: Text(text),
       action: showActionButton
           ? SnackBarAction(
               label: "ОК",
-              textColor: GRAY_LIGHT,
+              textColor: grayLight,
               onPressed: () {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    backgroundColor: DEFAULT_TITLE_COLOR,
+                    backgroundColor: defaultTitleColor,
                     content: Text("You have pressed 'ОК' button"),
                   ),
                 );

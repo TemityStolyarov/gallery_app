@@ -10,8 +10,8 @@ class AddPhotoDialogPanel extends StatelessWidget {
     return AlertDialog(
       insetPadding: const EdgeInsets.all(16),
       contentPadding: const EdgeInsets.all(0),
-      shadowColor: INVISIBLE,
-      backgroundColor: INVISIBLE,
+      shadowColor: invisible,
+      backgroundColor: invisible,
       content: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -19,7 +19,7 @@ class AddPhotoDialogPanel extends StatelessWidget {
             width: screenSize,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: DEFAULT_BACKGROUND_COLOR,
+              color: defaultBackgroundColor,
             ),
             child: Column(
               children: [
@@ -55,7 +55,7 @@ class AddPhotoDialogPanel extends StatelessWidget {
             child: Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: DEFAULT_BACKGROUND_COLOR,
+                color: defaultBackgroundColor,
               ),
               child: const SizedBox(
                 height: 44,
@@ -63,7 +63,7 @@ class AddPhotoDialogPanel extends StatelessWidget {
                   child: Text(
                     'Отмена',
                     style: TextStyle(
-                      color: DEFAULT_ACCENT_COLOR,
+                      color: defaultAccentColor,
                     ),
                   ),
                 ),

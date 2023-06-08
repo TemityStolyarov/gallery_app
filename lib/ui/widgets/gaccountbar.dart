@@ -11,13 +11,13 @@ class GAccountBar extends StatelessWidget {
     return AppBar(
       toolbarHeight: 65,
       elevation: 1,
-      backgroundColor: DEFAULT_BACKGROUND_COLOR,
+      backgroundColor: defaultBackgroundColor,
       title: const Column(
         children: [
           Text(
             'Profile',
             style: TextStyle(
-              color: DEFAULT_TITLE_COLOR,
+              color: defaultTitleColor,
             ),
           ),
         ],
@@ -27,11 +27,11 @@ class GAccountBar extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: IconButton(
-            splashColor: INVISIBLE,
-            highlightColor: INVISIBLE,
+            splashColor: invisible,
+            highlightColor: invisible,
             icon: const Icon(
               Icons.settings_outlined,
-              color: DEFAULT_ACCENT_COLOR,
+              color: defaultAccentColor,
               size: 28,
             ),
             onPressed: () {},

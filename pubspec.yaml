@@ -15,6 +15,8 @@ dependencies:
   build_runner: ^2.1.7
   json_annotation: ^4.8.1
   intl: ^0.18.1
+  dotted_border: ^2.0.0+3
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +32,8 @@ flutter_icons:
   image_path_ios: assets/images/gallery_logo.png
 
 flutter:
+  assets:
+    - assets/images/on_error.png
   uses-material-design: true
   fonts:
     - family: SF Pro Display
