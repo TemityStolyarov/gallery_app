@@ -40,12 +40,12 @@ class _FeedPageState extends State<FeedPage> {
       ),
       body: const GTabBar(),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: DEFAULT_BACKGROUND_COLOR,
+        backgroundColor: defaultBackgroundColor,
         items: _getBottomNavigationBar(),
         currentIndex: _selectedIndex,
         onTap: onItemTapped,
-        selectedItemColor: DEFAULT_ACCENT_COLOR,
-        unselectedItemColor: DEFAULT_SUBTITLE_COLOR,
+        selectedItemColor: defaultAccentColor,
+        unselectedItemColor: defaultSubtitleColor,
         unselectedFontSize: 14,
       ),
     );

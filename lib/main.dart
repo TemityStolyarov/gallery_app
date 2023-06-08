@@ -15,12 +15,12 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       onGenerateRoute: appRouter.onGenerateRoute,
       theme: ThemeData(
-        scaffoldBackgroundColor: DEFAULT_BACKGROUND_COLOR,
+        scaffoldBackgroundColor: defaultBackgroundColor,
         fontFamily: 'SF Pro Display',
       ),
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
-      color: DEFAULT_ACCENT_COLOR,
+      color: defaultAccentColor,
     );
   }
 }

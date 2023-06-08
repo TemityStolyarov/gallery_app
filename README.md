@@ -22,4 +22,5 @@ An application that gets access to a library of images and allows you to display
 * 06/05 - 7h
 * 06/06 - X
 * 06/07 - X
+* 06/08 - 9h
 

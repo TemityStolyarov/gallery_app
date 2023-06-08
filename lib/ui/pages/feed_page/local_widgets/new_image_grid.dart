@@ -1,12 +1,15 @@
 import 'dart:convert';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_app/api/gallery_api.dart';
-import 'package:gallery_app/api/image_model.dart';
+import 'package:gallery_app/api/image_service.dart';
 import 'package:gallery_app/core/constants.dart';
-import 'package:gallery_app/ui/pages/feed_page/local_widgets/image_detail_page.dart';
+import 'package:gallery_app/core/image_model.dart';
+import 'package:gallery_app/core/loading_indicator.dart';
+import 'package:gallery_app/ui/pages/image_detail_page/image_detail_page.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class NewImageGridScreen extends StatefulWidget {
   const NewImageGridScreen({super.key});
@@ -16,18 +19,29 @@ class NewImageGridScreen extends StatefulWidget {
 }
 
 class _ImageGridScreenState extends State<NewImageGridScreen> {
-  final GalleryApi _galleryApi = GalleryApi();
+  final ImageService _imageService = ImageService();
+  final scrollController = ScrollController();
+  bool isLoading = false;
+  int page = 1;
   late Future<List<ImageModel>> _imagesFuture;
 
   @override
   void initState() {
     super.initState();
-    _imagesFuture = _galleryApi.getNewImages();
+    scrollController.removeListener(() {});
+    scrollController.addListener(_scrollListener);
+    _imagesFuture =
+        _imageService.getImages(isNew: true, isPopular: false, page: page);
   }
 
   Future<void> _refreshPage() async {
-    final response = await _galleryApi.getNewImages();
+    page = 1;
+    isLoading = false;
+    final response = await _imageService.getImages(
+        isNew: true, isPopular: false, page: page);
     setState(() {
+      scrollController.removeListener(() {});
+      scrollController.addListener(_scrollListener);
       _imagesFuture = Future.delayed(
         Duration.zero,
         () {
@@ -48,51 +62,86 @@ class _ImageGridScreenState extends State<NewImageGridScreen> {
           return SizedBox(
             height: screenHeight,
             child: RefreshIndicator(
-              color: DEFAULT_ACCENT_COLOR,
+              color: defaultAccentColor,
               onRefresh: _refreshPage,
               displacement: 0,
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.manual,
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 150 / 100,
-                  ),
-                  itemCount: images.length,
-                  clipBehavior: Clip.hardEdge,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () async {
-                        final response = await http.get(Uri.parse(
-                            'https://gallery.prod1.webant.ru${images[index].user}'));
-                        final jsonResponse = jsonDecode(response.body);
-                        final username = jsonResponse['username'];
+                controller: scrollController,
+                child: Column(
+                  children: [
+                    GridView.builder(
+                      semanticChildCount: images.length + 1,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 150 / 100,
+                      ),
+                      itemCount: images.length,
+                      clipBehavior: Clip.hardEdge,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () async {
+                            final response = await http.get(Uri.parse(
+                                'https://gallery.prod1.webant.ru${images[index].user}'));
+                            final jsonResponse = jsonDecode(response.body);
+                            final username = jsonResponse['username'];
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ImageDetailPage(
-                              images[index],
-                              username: username,
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ImageDetailPage(
+                                  images[index],
+                                  username: username,
+                                ),
+                              ),
+                            );
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5.0),
+                            child: Image.network(
+                              'https://gallery.prod1.webant.ru/media/${images[index].image.name}',
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return DottedBorder(
+                                  dashPattern: const [6, 10],
+                                  color: defaultAccentColor,
+                                  strokeWidth: 3,
+                                  strokeCap: StrokeCap.round,
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/images/on_error.png',
+                                      scale: 10,
+                                    ),
+                                  ),
+                                );
+                              },
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
+                                return const LoadingIndicator();
+                              },
                             ),
                           ),
                         );
                       },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5.0),
-                        child: Image.network(
-                          'https://gallery.prod1.webant.ru/media/${images[index].image.name}',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  },
+                    ),
+                    isLoading
+                        ? const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: LoadingIndicator(),
+                          )
+                        : Container(),
+                  ],
                 ),
               ),
             ),
@@ -102,11 +151,37 @@ class _ImageGridScreenState extends State<NewImageGridScreen> {
             child: Text('Error: ${snapshot.error}'),
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const LoadingIndicator();
         }
       },
     );
+  }
+
+  Future<void> _scrollListener() async {
+    if (isLoading) return;
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      setState(() {
+        isLoading = true;
+      });
+      final prevData = _imagesFuture;
+      page++;
+      List<ImageModel> newData = await prevData +
+          await _imageService.getImages(
+              isNew: true, isPopular: false, page: page);
+
+      _imagesFuture = Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          setState(() {
+            isLoading = false;
+          });
+          return newData;
+        },
+      );
+      setState(() {
+        _imagesFuture = _imagesFuture;
+      });
+    }
   }
 }
