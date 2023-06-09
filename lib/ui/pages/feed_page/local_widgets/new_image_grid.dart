@@ -127,7 +127,8 @@ class _ImageGridScreenState extends State<NewImageGridScreen> {
                                 if (loadingProgress == null) {
                                   return child;
                                 }
-                                return const LoadingIndicator();
+                                return const LoadingIndicator(
+                                    defaultAccentColor);
                               },
                             ),
                           ),
@@ -137,7 +138,7 @@ class _ImageGridScreenState extends State<NewImageGridScreen> {
                     isLoading
                         ? const Padding(
                             padding: EdgeInsets.all(16.0),
-                            child: LoadingIndicator(),
+                            child: LoadingIndicator(grayLight),
                           )
                         : Container(),
                   ],
@@ -150,7 +151,7 @@ class _ImageGridScreenState extends State<NewImageGridScreen> {
             child: Text('Error: ${snapshot.error}'),
           );
         } else {
-          return const LoadingIndicator();
+          return const LoadingIndicator(defaultAccentColor);
         }
       },
     );

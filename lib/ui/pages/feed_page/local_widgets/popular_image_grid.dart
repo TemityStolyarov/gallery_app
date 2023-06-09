@@ -130,7 +130,8 @@ class _ImageGridScreenState extends State<PopularImageGridScreen> {
                                 if (loadingProgress == null) {
                                   return child;
                                 }
-                                return const LoadingIndicator();
+                                return const LoadingIndicator(
+                                    defaultAccentColor);
                               },
                             ),
                           ),
@@ -140,7 +141,7 @@ class _ImageGridScreenState extends State<PopularImageGridScreen> {
                     isLoading
                         ? const Padding(
                             padding: EdgeInsets.all(16.0),
-                            child: LoadingIndicator(),
+                            child: LoadingIndicator(grayLight),
                           )
                         : Container(),
                   ],
@@ -153,7 +154,7 @@ class _ImageGridScreenState extends State<PopularImageGridScreen> {
             child: Text('Error: ${snapshot.error}'),
           );
         } else {
-          return const LoadingIndicator();
+          return const LoadingIndicator(defaultAccentColor);
         }
       },
     );
